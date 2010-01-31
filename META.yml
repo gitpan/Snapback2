@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Snapback2
-version:            0.914
+version:            0.915
 abstract:           Snapback2 -- automated rsync backup
 author:
     - Mike Heins <snapback2@perusion.org>

@@ -55,7 +55,7 @@ for(keys %localdef) {
 
 use vars qw/$VERSION/;
 
-$VERSION = '0.914';
+$VERSION = '0.915';
 
 =head1 NAME
 

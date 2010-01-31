@@ -15,7 +15,7 @@ sub initialize {
 	my %X;
 	$X{INSTALLDIRS}	= "perl";
 	$X{clean} = {
-		FILES => join(" ", 'scripts/initp.pl', @scripts, 'b_target', 'b_source'),
+		FILES => join(" ", 'scripts/initp.pl', @scripts, 'b_target', 'b_source', 'b_source2'),
 	};
 	$X{EXE_FILES}	= [ @scripts ];
 	$X{PL_FILES}	= { 'relocate.util' => [ @scripts ] };

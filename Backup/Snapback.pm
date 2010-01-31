@@ -41,7 +41,7 @@ use strict;
 use vars qw/$VERSION $ERROR $errstr %Defaults/;
 no warnings qw/ uninitialized /;
 
-$VERSION = '0.914';
+$VERSION = '0.915';
 
 =head1 NAME
 
@@ -953,6 +953,21 @@ sub backup_directory {
 	## so we  check the dailies/weeklies/monthlies also.
 	## Not very efficient, since we check this for each backup set
 	## that we run, instead of just once for all.  Oh well.
+
+	## Regularize hourly directories to check for holes if necessary
+	if($hr_backup > 0) {
+		for my $x (0 .. ($hr_backup - 1) ) {
+			next if -d "$backupdir.$x";
+			last if $x >= $hr_backup;
+			for my $y (($x + 1) .. $hr_backup) {
+				next unless -d "$backupdir.$y";
+				$self->log_debug(qq{rename $backupdir.$y --> $backupdir.$x to plug hole.});
+				rename "$backupdir.$y", "$backupdir.$x"
+					or warn "Tried to rename $backupdir.$y --> $backupdir.$x: $!\n";
+				last;
+			}
+		}
+	}
 
 	## Check the directories
 	## - hourly backup

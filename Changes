@@ -72,3 +72,9 @@ Revision history for Snapback2.
 	  and no email (even with AlwaysEmail) if no backup done.
 	- Improve snapcopy to allow transfer of only one snapshot type, along with
 	  transferring that via SSH.
+0.915
+	- Add patch suggested by Matthew S. Warren <msw@buelba.com>. It checks for
+	  hourly.0 (or daily.0 as case may be) and moves next highest hourly there
+	  to prevent retransfer in case of lost connection.
+
+
