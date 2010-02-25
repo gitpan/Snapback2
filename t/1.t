@@ -99,16 +99,22 @@ ok($snap->config(-hourlies) == 8 , 'directory container');
 $snap->set_backup('faux');
 ok($snap->config(-hourlies) == 6, 'change backup');
 
-$snap->set_directory("$curdir/b_source");
-$snap->backup_directory();
+SKIP: {
+	my $clink = `cp --help`;
 
-my $testfile = "$curdir/b_target/faux$curdir/b_source/hourly.0/test_snapback.cfg";
-my $status = -f $testfile;
-ok($status, 'backup_directory');
+	skip "No gnu copy for linking", 2 unless $clink =~ /--link/;
+	$snap->set_directory("$curdir/b_source");
+	$snap->backup_directory();
 
-$snap->backup_all();
-$testfile = "$curdir/b_target/faux$curdir/b_source/hourly.0/test_snapback.cfg";
-$status = -f $testfile;
-ok($status, 'backup_all');
+	my $testfile = "$curdir/b_target/faux$curdir/b_source/hourly.0/test_snapback.cfg";
+	my $status = -f $testfile;
+	ok($status, 'backup_directory');
+
+	$snap->backup_all();
+	$testfile = "$curdir/b_target/faux$curdir/b_source/hourly.0/test_snapback.cfg";
+	$status = -f $testfile;
+	ok($status, 'backup_all');
+
+}
 
 #File::Path::rmtree([@dirs]);

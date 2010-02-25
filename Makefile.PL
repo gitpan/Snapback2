@@ -12,6 +12,22 @@ sub initialize {
 		snapback2
 		snapcopy
 	);
+
+	my $clink = `cp --help`;
+	$clink =~ /--link/ 
+		or print <<EOF;
+###############
+
+	WARNING
+		This module will not work properly until it has access to the GNU cp command.
+		It is required for the --link option, which is central to the functionality.
+		If you install GNU cp in a non-standard place which is not first in your
+		path, add this to snapback.conf:
+
+			cp  /path/to/gnu/cp
+
+##############
+EOF
 	my %X;
 	$X{INSTALLDIRS}	= "perl";
 	$X{clean} = {

@@ -76,5 +76,7 @@ Revision history for Snapback2.
 	- Add patch suggested by Matthew S. Warren <msw@buelba.com>. It checks for
 	  hourly.0 (or daily.0 as case may be) and moves next highest hourly there
 	  to prevent retransfer in case of lost connection.
-
-
+0.916
+	- Fix tests to only try real backup if GNU cp is present.
+	- Give big warning if GNU cp is not present. Still build, to avoid CPAN::Tester
+	  failures. Will also warn people who might want to use it.

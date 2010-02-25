@@ -44,10 +44,17 @@ Logfile $curdir/b_target/snapback.log
 </backup>
 EOF
 
-system "$^X blib/script/snapback2 -c b_source/test_snapback.cfg";
 
-my $testfile = "$curdir/b_target/pseudo$curdir/b_source/hourly.0/test_snapback.cfg";
-my $status = -f $testfile;
-ok($status);
+SKIP: {
+
+	my $clink = `cp --help`;
+	skip "No gnu copy for linking", 1 unless $clink =~ /--link/;
+
+	system "$^X blib/script/snapback2 -c b_source/test_snapback.cfg";
+	my $testfile = "$curdir/b_target/pseudo$curdir/b_source/hourly.0/test_snapback.cfg";
+	my $status = -f $testfile;
+
+	ok($status);
+}
 
 #File::Path::rmtree([@dirs]);
