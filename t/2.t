@@ -50,9 +50,6 @@ SKIP: {
 	my $clink = `cp --help`;
 	skip "No gnu copy for linking", 1 unless $clink =~ /--link/;
 
-	my $rs = `rsync --version` || '';
-	skip "No rsync for use", 1 unless $rs =~ /version\s+(2\.5\.[7-9]|2\.[6-9]\.|[3-7]\.)/ ;
-
 	system "$^X blib/script/snapback2 -c b_source/test_snapback.cfg";
 	my $testfile = "$curdir/b_target/pseudo$curdir/b_source/hourly.0/test_snapback.cfg";
 	my $status = -f $testfile;

@@ -13,22 +13,6 @@ sub initialize {
 		snapcopy
 	);
 
-	my $rs = `rsync --version`;
-	$rs =~ /version\s+(2\.5\.[7-9]|2\.[6-9]\.|[4-7]\.)/ 
-		or print <<EOF;
-###############
-
-	WARNING
-		This module will not work properly until it has access to rsync 2.5.7 
-		or higher.
-
-		If you install rsync in a non-standard place which is not first in your
-		path, add this to snapback.conf:
-
-			Rsync  /path/to/rsync
-
-##############
-EOF
 	my $clink = `cp --help`;
 	$clink =~ /--link/ 
 		or print <<EOF;

@@ -11,6 +11,9 @@ BEGIN { use_ok('Backup::Snapback') };
 
 #########################
 
+# Insert your test code below, the Test::More module is use()ed here so read
+# its man page ( perldoc Test::More ) for help writing this test script.
+
 use Cwd;
 use File::Path;
 my $curdir = cwd();
@@ -100,10 +103,6 @@ SKIP: {
 	my $clink = `cp --help`;
 
 	skip "No gnu copy for linking", 2 unless $clink =~ /--link/;
-
-	my $rs = `rsync --version` || '';
-	skip "No rsync for use", 2 unless $rs =~ /version\s+(2\.5\.[7-9]|2\.[6-9]\.|[3-7]\.)/ ;
-
 	$snap->set_directory("$curdir/b_source");
 	$snap->backup_directory();
 

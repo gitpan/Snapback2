@@ -80,3 +80,9 @@ Revision history for Snapback2.
 	- Fix tests to only try real backup if GNU cp is present.
 	- Give big warning if GNU cp is not present. Still build, to avoid CPAN::Tester
 	  failures. Will also warn people who might want to use it.
+1.001
+	- Allow specification of "RsyncShell rsync" on a different port. If
+	  hostname is host:NNN, then will make it be rsync://host:NNN/dir/
+	  instead of host:NNN::dir/, which won't work.
+	- It's been around long enough to give it a 1.001 version, don't
+	  you think?

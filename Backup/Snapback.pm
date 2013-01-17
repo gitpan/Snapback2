@@ -41,7 +41,7 @@ use strict;
 use vars qw/$VERSION $ERROR $errstr %Defaults/;
 no warnings qw/ uninitialized /;
 
-$VERSION = '0.917';
+$VERSION = '1.001';
 
 =head1 NAME
 
@@ -1237,6 +1237,9 @@ sub backup_directory {
 	if (! $rsh or $rsh eq 'none') {
 		$xfer_dir = $dir;
 	}
+    elsif ($rsh eq 'rsync' and $host =~ /:\d+$/) { 
+        $xfer_dir = "rsync://$host/$dir"; 
+    }
 	elsif ($rsh eq 'rsync') {
 		$xfer_dir = "${host}::$dir";
 	}
